@@ -9,6 +9,8 @@
     <link rel="stylesheet" href="TemplateData/style.css?v=2">
   </head>
   <body>
+    <!-- LOCKED: the game isn't playable on this domain yet. To open it, delete this div and set LOCKED = false below -->
+    <div id="locked" style="position:fixed;inset:0;z-index:1000;background:#000;color:#fff;display:flex;align-items:center;justify-content:center;font:700 clamp(32px,8vw,72px)/1 system-ui,-apple-system,'Segoe UI',Arial,sans-serif;letter-spacing:0.2em;">LOCKED</div>
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
@@ -108,7 +110,8 @@
         document.querySelector("#unity-fullscreen-button").title = "Fullscreen";
       }
 
-      document.querySelector("#unity-loading-bar").style.display = "block";
+      var LOCKED = true; // (the game doesn't load while locked)
+      if (!LOCKED) document.querySelector("#unity-loading-bar").style.display = "block";
 
       var script = document.createElement("script");
       script.src = loaderUrl;
@@ -126,7 +129,7 @@
               });
             };
 
-      document.body.appendChild(script);
+      if (!LOCKED) document.body.appendChild(script);
 
     </script>
   </body>
